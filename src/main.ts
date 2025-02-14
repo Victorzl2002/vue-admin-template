@@ -2,7 +2,7 @@
  * @Author: Victorzl
  * @Date: 2025-02-13 20:06:41
  * @LastEditors: Victorzl
- * @LastEditTime: 2025-02-14 13:41:26
+ * @LastEditTime: 2025-02-14 13:49:23
  * @Description: 请填写简介
  */
 
@@ -38,7 +38,7 @@ app.use(ElementPlus, {
 app.use(globalComponent)
 
 //引入全局样式
-import '@/style/index.css'
+import '@/style/index.scss'
 
 //挂载app应用
 app.mount('#app')
