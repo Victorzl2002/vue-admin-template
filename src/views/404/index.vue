@@ -1,14 +1,13 @@
 <!--
  * @Author: Victorzl
- * @Date: 2025-02-13 20:06:41
+ * @Date: 2025-02-15 12:10:16
  * @LastEditors: Victorzl
- * @LastEditTime: 2025-02-15 12:41:06
+ * @LastEditTime: 2025-02-15 12:28:06
  * @Description: 请填写简介
 -->
+
 <template>
-  <router-view></router-view>
+  <div>404</div>
 </template>
-
-<script setup lang="ts" name="App"></script>
-
+<script setup lang="ts" name=""></script>
 <style lang="scss" scoped></style>

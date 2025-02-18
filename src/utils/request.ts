@@ -2,7 +2,7 @@
  * @Author: Victorzl
  * @Date: 2025-02-14 16:22:19
  * @LastEditors: Victorzl
- * @LastEditTime: 2025-02-14 20:50:55
+ * @LastEditTime: 2025-02-15 15:23:31
  * @Descriptiog('有接口请求了')
 on: axios二次封装
  */
@@ -32,10 +32,6 @@ request.interceptors.response.use(
     /**
      * 成功回调，简化数据
      */
-    ElMessage({
-      type: 'success',
-      message: '接口请求成功',
-    })
     return response.data
   },
   (error) => {
