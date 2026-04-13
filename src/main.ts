@@ -2,7 +2,7 @@
  * @Author: Victorzl
  * @Date: 2025-02-13 20:06:41
  * @LastEditors: Victorzl
- * @LastEditTime: 2025-02-15 16:11:14
+ * @LastEditTime: 2025-02-22 14:10:49
  * @Description: 请填写简介
  */
 
@@ -15,6 +15,9 @@ import pinia from './stores/'
 
 //引入路由
 import router from './router'
+
+//引入路由守卫鉴权文件
+import '@/router/permission'
 
 //ElementPlus引入和国际化
 import ElementPlus from 'element-plus'

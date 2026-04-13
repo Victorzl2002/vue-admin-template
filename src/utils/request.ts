@@ -2,29 +2,25 @@
  * @Author: Victorzl
  * @Date: 2025-02-14 16:22:19
  * @LastEditors: Victorzl
- * @LastEditTime: 2025-02-15 15:23:31
+ * @LastEditTime: 2025-02-23 17:58:14
  * @Descriptiog('有接口请求了')
 on: axios二次封装
  */
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import useUserStore from '@/stores/user'
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000, //超时时间设置
 })
+
 request.interceptors.request.use((config) => {
   //config配置对象，headers属性请求头，经常给服务端携带公共参数
-  //
-  // 检查请求头中的auth字段
-  // if (config.headers.auth !== 'zl') {
-  //   // 如果auth不等于'z1'，则弹出错误信息
-  //   ElMessage({
-  //     type: 'error',
-  //     message: '权限不足，无法请求数据',
-  //   })
-  //   // 返回一个被拒绝的Promise，阻止继续请求
-  //   return Promise.reject('权限不足，无法请求数据')
-  // }
+  const userStore = useUserStore()
+  if (userStore.token) {
+    config.headers.token = userStore.token
+  }
+
   return config
 })
 request.interceptors.response.use(

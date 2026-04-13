@@ -2,7 +2,7 @@
  * @Author: Victorzl
  * @Date: 2025-02-18 12:00:01
  * @LastEditors: Victorzl
- * @LastEditTime: 2025-02-18 12:04:15
+ * @LastEditTime: 2025-02-22 13:37:41
  * @Description: 请填写简介
  */
 export const SET_TOKEN = (token: string) => {
@@ -11,4 +11,8 @@ export const SET_TOKEN = (token: string) => {
 
 export const GET_TOKEN = () => {
   return localStorage.getItem('TOKEN')
+}
+
+export const REMOVE_TOKEN = () => {
+  return localStorage.removeItem('TOKEN')
 }

@@ -2,7 +2,7 @@
  * @Author: Victorzl
  * @Date: 2025-02-15 11:20:03
  * @LastEditors: Victorzl
- * @LastEditTime: 2025-02-18 11:55:31
+ * @LastEditTime: 2025-02-21 21:06:51
  * @Description: 请填写简介
  */
 
@@ -24,4 +24,12 @@ export interface loginResponseData {
 
 export interface UserState {
   token: string | null
+  username: string
+  avatar: string
+}
+
+//设置仓库
+export interface SettingState {
+  fold: boolean
+  refresh: boolean
 }

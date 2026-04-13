@@ -2,7 +2,7 @@
  * @Author: Victorzl
  * @Date: 2025-02-15 12:01:29
  * @LastEditors: Victorzl
- * @LastEditTime: 2025-02-18 13:01:05
+ * @LastEditTime: 2025-02-22 18:08:31
  * @Description: 请填写简介
 -->
 <template>
@@ -10,11 +10,11 @@
     <div class="login_box">
       <!-- 登录 -->
       <div class="login_form">
-        <el-form>
+        <el-form :model="loginData" :rules="rules" ref="ruleFormRef">
           <h1>Hello👋</h1>
           <h2>欢迎来到Vue3后台管理系统</h2>
 
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               :prefix-icon="User"
               v-model="username"
@@ -23,7 +23,7 @@
             ></el-input>
           </el-form-item>
 
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               :prefix-icon="Lock"
               v-model="password"
@@ -47,7 +47,7 @@
 import { reactive, ref, toRefs } from 'vue'
 import { User, Lock } from '@element-plus/icons-vue'
 import useUserStore from '@/stores/user'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 //引入河获取当前时间的工具
 import { gainTime } from '@/utils/time'
@@ -56,6 +56,12 @@ const userStore = useUserStore()
 
 const router = useRouter()
 
+const route = useRoute()
+
+//获取el-form组件实例
+const ruleFormRef = ref()
+
+//表单数据
 const loginData = reactive({
   username: 'admin',
   password: '111111',
@@ -66,10 +72,13 @@ const { username, password } = toRefs(loginData)
 const isLoading = ref(false)
 
 const login = async () => {
+  //表单验证通过再发请求
+  await ruleFormRef.value.validate()
+
   isLoading.value = true
   try {
     await userStore.userLogin(loginData)
-    router.push('/')
+    router.push(route.query.redirect ? route.query.redirect : '/')
     ElNotification({
       type: 'success',
       title: '欢迎回来',
@@ -83,6 +92,35 @@ const login = async () => {
       message: (error as Error).message,
     })
   }
+}
+//自定义表单校验规则
+const validateUerName = (rule: any, value: any, callback: any) => {
+  if (/^[a-zA-Z0-9]{5,10}$/.test(value)) {
+    callback()
+  } else {
+    callback(new Error('账号长度至少五位'))
+  }
+}
+//定义表单校验对象
+const rules = {
+  //用户名自定义规则校验
+  username: [
+    {
+      required: true,
+      trigger: 'change',
+      validator: validateUerName,
+    },
+  ],
+  password: [
+    {
+      required: true,
+      type: 'string',
+      min: 6,
+      max: 15,
+      message: '密码长度至少为6位',
+      trigger: 'change',
+    },
+  ],
 }
 </script>
 
